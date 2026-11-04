@@ -26,7 +26,6 @@ jobs:
         run: printf 'import("./server/index.mjs");\n' > .output/app.js
 
       - name: Migrations base de données
-        if: false
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
           DATABASE_URL: ${{ secrets.DATABASE_URL_MIGRATION }}
