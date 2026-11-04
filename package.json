@@ -7,6 +7,12 @@
     "dev": "nuxt dev"
   },
   "dependencies": {
-    "nuxt": "^3.17.0"
+    "drizzle-orm": "^0.45.4",
+    "nuxt": "^3.17.0",
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.23.1",
+    "drizzle-kit": "^0.31.11"
   }
 }

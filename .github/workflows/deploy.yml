@@ -24,6 +24,17 @@ jobs:
       - name: Shim Passenger (app.js)
         run: printf 'import("./server/index.mjs");\n' > .output/app.js
 
+      - name: Migrations base de données
+        if: hashFiles('drizzle.config.ts') != ''
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL_MIGRATION }}
+        run: |
+          mkdir -p ~/.ssh && printf '%s\n' "$SSH_KEY" > ~/.ssh/db_tunnel && chmod 600 ~/.ssh/db_tunnel
+          ssh -i ~/.ssh/db_tunnel -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes \
+            -fN -L 5433:localhost:5432 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
+          bunx drizzle-kit migrate
+
       - name: Transfert du build sur PlanetHoster
         uses: easingthemes/ssh-deploy@main
         env:
