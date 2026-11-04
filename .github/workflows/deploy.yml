@@ -1,0 +1,40 @@
+name: Deploy to PlanetHoster
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Installer Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Installer les dépendances
+        run: bun install
+
+      - name: Compiler le projet
+        run: bun run build
+
+      - name: Shim Passenger (app.js)
+        run: printf 'import("./server/index.mjs");\n' > .output/app.js
+
+      - name: Transfert du build sur PlanetHoster
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          ARGS: "-rltgoDzv0 --delete"
+          SOURCE: ".output/"
+          EXCLUDE: "/tmp/, /node_modules/"
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          REMOTE_PORT: ${{ secrets.SSH_PORT }}
+          TARGET: ${{ secrets.SSH_TARGET_DIR }}
+          SCRIPT_AFTER: |
+            mkdir -p ${{ secrets.SSH_TARGET_DIR }}/tmp
+            touch ${{ secrets.SSH_TARGET_DIR }}/tmp/restart.txt
