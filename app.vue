@@ -3,6 +3,7 @@
     <h1>isono</h1>
     <p>Site en cours de développement</p>
     <p class="small">Revenez bientôt.</p>
+    <p class="small">Hébergé sur N0C — test déploiement 04/11/2026</p>
   </main>
 </template>
 
