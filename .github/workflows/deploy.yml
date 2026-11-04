@@ -34,6 +34,7 @@ jobs:
           mkdir -p ~/.ssh && printf '%s\n' "$SSH_KEY" > ~/.ssh/db_tunnel && chmod 600 ~/.ssh/db_tunnel
           ssh -i ~/.ssh/db_tunnel -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes \
             -fN -L 5433:127.0.0.1:5432 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
+          psql "$DATABASE_URL" -c "select current_user, current_database()"
           bunx drizzle-kit migrate
 
       - name: Transfert du build sur PlanetHoster
