@@ -159,6 +159,38 @@ button.text-link{border:0;background:none;padding:0;text-align:left;font-family:
 
 @media(min-width:1021px) and (max-width:1100px){.header-inner{gap:12px}}
 
+/* Responsive polish shared with the approved local preview. */
+html,body{overflow-x:hidden}
+.hero-art picture{display:block;width:100%;height:100%}
+.hero-art img{width:100%;height:100%;object-fit:contain;object-position:right center}
+@media (min-width:761px) and (max-width:1020px){
+  .header-inner{gap:12px;padding-left:16px;padding-right:16px}
+  .search-form{max-width:38vw}
+  .header-actions{gap:8px}
+  .nav-inner{padding-left:12px;padding-right:12px;gap:2px}
+  .nav-link{padding-left:7px;padding-right:7px}
+}
+@media (max-width:760px){
+  .header-actions{gap:4px}
+  .header-actions .icon-button{min-width:44px;min-height:44px}
+  .header-actions .icon-button>.icon{width:25px;height:25px}
+  .nav-inner{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:7px 12px;min-height:0;overflow:visible}
+  .nav-link{min-height:44px;padding:7px 3px;gap:3px;flex-direction:column;font-size:12px;line-height:1.1;text-align:center}
+  .nav-link .icon{width:20px;height:20px}
+  .hero-actions .button{min-height:48px}
+  .section-card,.button,.icon-button,.text-link{min-height:44px}
+}
+@media (max-width:420px){
+  .header-inner{padding-left:12px;padding-right:12px;column-gap:8px}
+  .brand-type strong{font-size:26px}
+  .brand-type span{font-size:11px}
+  .header-actions .icon-button{min-width:44px}
+  .nav-inner{padding-left:8px;padding-right:8px}
+  .nav-link{font-size:11px}
+  .hero-inner{padding-left:16px;padding-right:16px}
+  .hero-actions .button{width:100%}
+}
+
 /* Outlined lettering preserves the approved type on every device. */
 .brand-type strong{display:flex;align-items:center;justify-content:center;width:3.62em;height:1.25em}.brand-type strong img{width:3.508em;height:auto}.brand-type>span{display:flex;align-items:center;justify-content:center;width:7.418em;height:1.5em}.brand-type>span img{width:100%;height:auto}
 .tagline{background:none!important;-webkit-text-fill-color:initial}.tagline-art{display:block;width:11.812em;height:.794em;max-width:100%;margin:auto;background:linear-gradient(180deg,#fff0b0 0%,#edca63 28%,#bd8c24 53%,#f5d977 74%,#cf9e2c 100%);mask:url(/assets/isono-slogan.svg) center/contain no-repeat;-webkit-mask:url(/assets/isono-slogan.svg) center/contain no-repeat}
